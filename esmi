@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Surprise</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+            font-family: 'Cursive', sans-serif;
+        }
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .slide {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+        }
+        .slide h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.8);
+            animation: fadeIn 2s ease-in-out;
+        }
+        .button {
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background: rgba(255, 69, 69, 0.9);
+        }
+        .gallery img, .food-logos img, .date-locations img {
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(255, 0, 0, 0.5);
+        }
+        .food-logos, .date-locations {
+            display: none;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <video class="video-background" autoplay loop muted>
+        <source src="valentine-intro.mp4" type="video/mp4">
+    </video>
+    
+    <audio id="bg-music" loop>
+        <source src="romantic-music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="slide" id="slide6">
+        <h1>🍽️ Choose Your Food 🍽️</h1>
+        <select id="foodChoice" onchange="showLogos()">
+            <option value="">Select</option>
+            <option value="burger-fries">Burger & Fries</option>
+            <option value="pizza">Pizza</option>
+            <option value="pasta">Pasta</option>
+        </select>
+        <div class="food-logos" id="foodLogos">
+            <img src="jollibee.jpg" alt="Jollibee">
+            <img src="mcdonalds.jpg" alt="McDonald's">
+            <img src="kfc.jpg" alt="KFC">
+            <img src="starbucks.jpg" alt="Starbucks">
+        </div>
+        <button class="button" onclick="nextSlide(7)">Next</button>
+    </div>
+
+    <div class="slide" id="slide7">
+        <h1>📅 Pick a Date 📅</h1>
+        <input type="date" id="datePicker" onchange="showLocations()">
+        <div class="date-locations" id="dateLocations">
+            <img src="mangantila.jpg" alt="Mangantila">
+            <img src="beach.jpg" alt="Beach">
+            <img src="cathedral.jpg" alt="Cathedral">
+        </div>
+        <button class="button" onclick="nextSlide(8)">Next</button>
+    </div>
+    
+    <script>
+        function showLogos() {
+            const foodChoice = document.getElementById("foodChoice").value;
+            const foodLogos = document.getElementById("foodLogos");
+            if (foodChoice) {
+                foodLogos.style.display = "block";
+            } else {
+                foodLogos.style.display = "none";
+            }
+        }
+        
+        function showLocations() {
+            const datePicker = document.getElementById("datePicker").value;
+            const dateLocations = document.getElementById("dateLocations");
+            if (datePicker) {
+                dateLocations.style.display = "block";
+            } else {
+                dateLocations.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
